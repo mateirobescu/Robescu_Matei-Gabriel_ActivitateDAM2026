@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">challange</string>
+    <string name="adaugare">Adaugare</string>
+    <string name="adauga_armata">Adauga Armata</string>
+    <string name="numarul_de_soldati">Numarul de soldati</string>
+    <string name="numarul_de_tancuri">Numarul de tancuri</string>
+    <string name="tara">Tara</string>
+    <string name="este_in_razboi">Este in razboi</string>
+</resources>
