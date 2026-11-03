@@ -2,6 +2,7 @@ package com.example.challange;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -12,10 +13,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class AddActivity extends AppCompatActivity {
+
+    private Armata armataToReturn;
+    private int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,23 @@ public class AddActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Bundle extras = getIntent().getExtras();
+        if(extras != null) {
+            armataToReturn = extras.getParcelable("armata");
+            position = extras.getInt("position");
+            EditText soldati_et = findViewById(R.id.nr_soldati_et);
+            EditText tara_et = findViewById(R.id.tara_et);
+            CheckBox este_in_razboi_et = findViewById(R.id.in_razboi_cb);
+            EditText tancuri_et = findViewById(R.id.nr_tancuri_et);
+
+            if(armataToReturn != null) {
+                soldati_et.setText(String.valueOf(armataToReturn.getNrSoldati()));
+                tara_et.setText(String.valueOf(armataToReturn.getTara()));
+                este_in_razboi_et.setChecked(armataToReturn.isEsteInRazboi());
+                tancuri_et.setText(String.valueOf(armataToReturn.getNrTancuri()));
+            }
+        }
     }
 
     public void addArmy(View view) {
@@ -44,10 +62,20 @@ public class AddActivity extends AppCompatActivity {
             nrTancuri = Integer.parseInt(tancuri_et.getText().toString());
         } catch (Exception e) {}
 
-        Armata armata = new Armata(nrSoldati, tara, eInRazboi, nrTancuri);
-
         Intent it = new Intent();
-        it.putExtra("armata", armata);
+        if(armataToReturn == null) {
+            Log.w("ok", "tag");
+            armataToReturn = new Armata(nrSoldati, tara, eInRazboi, nrTancuri);
+        }
+        else {
+            armataToReturn.setNrSoldati(nrSoldati);
+            armataToReturn.setTara(tara);
+            armataToReturn.setEsteInRazboi(eInRazboi);
+            armataToReturn.setNrTancuri(nrTancuri);
+            it.getExtras().putInt("position", position);
+        }
+
+        it.getExtras().putParcelable("armata", armataToReturn);
 
         setResult(RESULT_OK, it);
         finish();

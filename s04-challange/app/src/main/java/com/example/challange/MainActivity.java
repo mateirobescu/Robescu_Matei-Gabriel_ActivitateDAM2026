@@ -56,19 +56,12 @@ public class MainActivity extends AppCompatActivity {
 
         if(requestCode == 45) {
             if(resultCode == RESULT_OK) {
-                Armata armata = (Armata) data.getExtras().getSerializable("armata");
+                Armata armata = (Armata) data.getExtras().getParcelable("armata");
                 Toast.makeText(this, armata.toString(), Toast.LENGTH_LONG).show();;
 
                 armate.add(armata);
 
                 TextView armata_tv = findViewById(R.id.armata_tv);
-//                String existing_text = armata_tv.getText().toString();
-//                String target_text = existing_text + (!existing_text.isEmpty() ? "\n" : "") + armata.toString();
-
-//                armata_tv.setText(target_text);
-
-
-
             }
         }
     }
