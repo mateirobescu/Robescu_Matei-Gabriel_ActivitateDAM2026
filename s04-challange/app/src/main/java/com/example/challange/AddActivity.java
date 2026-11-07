@@ -59,12 +59,13 @@ public class AddActivity extends AppCompatActivity {
         int nrTancuri = 0;
         try {
             nrSoldati = Integer.parseInt(soldati_et.getText().toString());
+        } catch (Exception e) {}
+        try {
             nrTancuri = Integer.parseInt(tancuri_et.getText().toString());
         } catch (Exception e) {}
 
         Intent it = new Intent();
         if(armataToReturn == null) {
-            Log.w("ok", "tag");
             armataToReturn = new Armata(nrSoldati, tara, eInRazboi, nrTancuri);
         }
         else {
@@ -72,10 +73,10 @@ public class AddActivity extends AppCompatActivity {
             armataToReturn.setTara(tara);
             armataToReturn.setEsteInRazboi(eInRazboi);
             armataToReturn.setNrTancuri(nrTancuri);
-            it.getExtras().putInt("position", position);
+            it.putExtra("position", position);
         }
 
-        it.getExtras().putParcelable("armata", armataToReturn);
+        it.putExtra("armata", armataToReturn);
 
         setResult(RESULT_OK, it);
         finish();

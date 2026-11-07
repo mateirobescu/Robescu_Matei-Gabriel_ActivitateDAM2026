@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         Button listaBtn = findViewById(R.id.lista_btn);
         listaBtn.setOnClickListener((view) -> {
             Intent it = new Intent(getApplicationContext(), ListActivity.class);
-            it.putExtra("armate", armate);
+            it.putParcelableArrayListExtra("armate", armate);
 
             startActivity(it);
         });
