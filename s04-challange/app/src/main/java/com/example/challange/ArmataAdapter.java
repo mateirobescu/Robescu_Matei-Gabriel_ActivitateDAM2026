@@ -1,7 +1,6 @@
 package com.example.challange;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +10,24 @@ import android.widget.TextView;
 import java.util.List;
 
 public class ArmataAdapter extends BaseAdapter {
-    private List<Armata> armatas = null;
-    private Context ctx;
-    private int resourceLayout;
+    private final Context ctx;
+    private final int resourceLayout;
+    private final List<Armata> armate;
 
-    public ArmataAdapter(Context ctx, int resourceLayout, List<Armata> armatas) {
-        this.armatas = armatas;
+    public ArmataAdapter(Context ctx, int resourceLayout, List<Armata> armate) {
         this.ctx = ctx;
         this.resourceLayout = resourceLayout;
+        this.armate = armate;
     }
 
     @Override
     public int getCount() {
-        return armatas.size();
+        return armate.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return armatas.get(position);
+        return armate.get(position);
     }
 
     @Override
@@ -38,19 +37,18 @@ public class ArmataAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = LayoutInflater.from(this.ctx);
-        View v = inflater.inflate(resourceLayout, parent, false);
+        View v = LayoutInflater.from(ctx).inflate(resourceLayout, parent, false);
 
-        TextView tara_tv = v.findViewById(R.id.tara_tv);
-        TextView soldati_tv = v.findViewById(R.id.soldati_tv);
-        TextView tancuri_tv = v.findViewById(R.id.tancuri_tv);
-        TextView razboi_tv = v.findViewById(R.id.razboi_tv);
+        TextView taraTv = v.findViewById(R.id.taraTv);
+        TextView soldatiTv = v.findViewById(R.id.soldatiTv);
+        TextView tancuriTv = v.findViewById(R.id.tancuriTv);
+        TextView razboiTv = v.findViewById(R.id.razboiTv);
 
-        Armata armata = (Armata) this.getItem(position);
-        tara_tv.setText(armata.getTara());
-        soldati_tv.setText(String.valueOf(armata.getNrSoldati()));
-        tancuri_tv.setText(String.valueOf(armata.getNrTancuri()));
-        razboi_tv.setText(String.valueOf(armata.isEsteInRazboi()));
+        Armata armata = (Armata) getItem(position);
+        taraTv.setText(armata.getTara());
+        soldatiTv.setText(String.valueOf(armata.getNrSoldati()));
+        tancuriTv.setText(String.valueOf(armata.getNrTancuri()));
+        razboiTv.setText(String.valueOf(armata.isEsteInRazboi()));
 
         return v;
     }

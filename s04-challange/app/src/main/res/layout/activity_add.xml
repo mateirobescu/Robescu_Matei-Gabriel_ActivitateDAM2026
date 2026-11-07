@@ -9,27 +9,27 @@
         tools:context=".AddActivity">
 
     <EditText
-            android:id="@+id/nr_soldati_et"
+            android:id="@+id/nrSoldatiEt"
             android:hint="@string/numarul_de_soldati"
             android:inputType="number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     <EditText
-            android:id="@+id/tara_et"
+            android:id="@+id/taraEt"
             android:hint="@string/tara"
             android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     <CheckBox
-            android:id="@+id/in_razboi_cb"
+            android:id="@+id/inRazboiCb"
             android:text="@string/este_in_razboi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
     <EditText
-            android:id="@+id/nr_tancuri_et"
+            android:id="@+id/nrTancuriEt"
             android:hint="@string/numarul_de_tancuri"
             android:inputType="number"
             android:layout_width="match_parent"
@@ -37,7 +37,7 @@
 
 
     <Button
-            android:id="@+id/add_btn"
+            android:id="@+id/addBtn"
             android:text="@string/adauga_armata"
             android:onClick="addArmy"
             android:layout_width="match_parent"

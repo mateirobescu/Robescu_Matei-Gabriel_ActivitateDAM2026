@@ -2,7 +2,6 @@ package com.example.challange;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -14,6 +13,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class AddActivity extends AppCompatActivity {
+
+    private EditText nrSoldatiEt;
+    private EditText taraEt;
+    private CheckBox inRazboiCb;
+    private EditText nrTancuriEt;
 
     private Armata armataToReturn;
     private int position;
@@ -30,55 +34,52 @@ public class AddActivity extends AppCompatActivity {
             return insets;
         });
 
+        nrSoldatiEt = findViewById(R.id.nrSoldatiEt);
+        taraEt = findViewById(R.id.taraEt);
+        inRazboiCb = findViewById(R.id.inRazboiCb);
+        nrTancuriEt = findViewById(R.id.nrTancuriEt);
+
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        if (extras != null) {
             armataToReturn = extras.getParcelable("armata");
             position = extras.getInt("position");
-            EditText soldati_et = findViewById(R.id.nr_soldati_et);
-            EditText tara_et = findViewById(R.id.tara_et);
-            CheckBox este_in_razboi_et = findViewById(R.id.in_razboi_cb);
-            EditText tancuri_et = findViewById(R.id.nr_tancuri_et);
 
-            if(armataToReturn != null) {
-                soldati_et.setText(String.valueOf(armataToReturn.getNrSoldati()));
-                tara_et.setText(String.valueOf(armataToReturn.getTara()));
-                este_in_razboi_et.setChecked(armataToReturn.isEsteInRazboi());
-                tancuri_et.setText(String.valueOf(armataToReturn.getNrTancuri()));
+            if (armataToReturn != null) {
+                nrSoldatiEt.setText(String.valueOf(armataToReturn.getNrSoldati()));
+                taraEt.setText(armataToReturn.getTara());
+                inRazboiCb.setChecked(armataToReturn.isEsteInRazboi());
+                nrTancuriEt.setText(String.valueOf(armataToReturn.getNrTancuri()));
             }
         }
     }
 
     public void addArmy(View view) {
-        EditText soldati_et = findViewById(R.id.nr_soldati_et);
-        EditText tara_et = findViewById(R.id.tara_et);
-        CheckBox este_in_razboi_et = findViewById(R.id.in_razboi_cb);
-        EditText tancuri_et = findViewById(R.id.nr_tancuri_et);
-        int nrSoldati = 0;
-        String tara = tara_et.getText().toString();
-        boolean eInRazboi = este_in_razboi_et.isChecked();
-        int nrTancuri = 0;
-        try {
-            nrSoldati = Integer.parseInt(soldati_et.getText().toString());
-        } catch (Exception e) {}
-        try {
-            nrTancuri = Integer.parseInt(tancuri_et.getText().toString());
-        } catch (Exception e) {}
+        String tara = taraEt.getText().toString();
+        boolean eInRazboi = inRazboiCb.isChecked();
+        int nrSoldati = parseIntOrZero(nrSoldatiEt.getText().toString());
+        int nrTancuri = parseIntOrZero(nrTancuriEt.getText().toString());
 
         Intent it = new Intent();
-        if(armataToReturn == null) {
+        if (armataToReturn == null) {
             armataToReturn = new Armata(nrSoldati, tara, eInRazboi, nrTancuri);
-        }
-        else {
+        } else {
             armataToReturn.setNrSoldati(nrSoldati);
             armataToReturn.setTara(tara);
             armataToReturn.setEsteInRazboi(eInRazboi);
             armataToReturn.setNrTancuri(nrTancuri);
             it.putExtra("position", position);
         }
-
         it.putExtra("armata", armataToReturn);
 
         setResult(RESULT_OK, it);
         finish();
+    }
+
+    private int parseIntOrZero(String text) {
+        try {
+            return Integer.parseInt(text);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 }
