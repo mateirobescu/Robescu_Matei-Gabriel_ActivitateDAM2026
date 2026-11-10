@@ -29,13 +29,26 @@
             app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+            android:layout_width="105dp"
+            android:layout_height="28dp"
+            android:id="@+id/armataTv"
+            app:layout_constraintTop_toBottomOf="@+id/adaugaBtn"
+            android:layout_marginTop="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.509"
+            app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+            android:text="Imagini"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/armataTv"
-            tools:layout_editor_absoluteX="205dp"
-            app:layout_constraintTop_toBottomOf="@+id/adaugaBtn"
-            android:layout_marginTop="32dp" />
-
+            android:id="@+id/imaginiBtn"
+            app:layout_constraintBottom_toTopOf="@+id/listaBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

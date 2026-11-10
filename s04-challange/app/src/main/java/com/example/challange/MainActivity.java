@@ -40,6 +40,12 @@ public class MainActivity extends AppCompatActivity {
         });
 
         armate.add(new Armata(30000, "Romania", false, 200));
+
+        Button imaginiBtn = findViewById(R.id.imaginiBtn);
+        imaginiBtn.setOnClickListener(view -> {
+            Intent it = new Intent(getApplicationContext(), ImaginiList.class);
+            startActivity(it);
+        });
     }
 
     public void addArmata(View view) {
